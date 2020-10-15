@@ -14,6 +14,10 @@ a{
     text-decoration: none;
 }
 
+img{
+    width: 100%;
+}
+
 // colors
 
 $dark-gray: hsl(0, 0%, 63%);
@@ -29,6 +33,10 @@ $large: 32px;
 
 @mixin transitionEffect {
     transition: all 0.3s ease;
+}
+
+@mixin transitionSlow {
+    transition: all 0.6s ease;
 }
 
 @mixin flexDisplay($direction, $align, $justify) {

@@ -1,5 +1,315 @@
 @import './config';
 
 body{
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
     font-family: 'Spartan', sans-serif;
+    background-color: $white;
+}
+
+.top{
+    @include gridDisplay(2fr 1.5fr, 0);
+    position: relative;
+
+    .left{
+        position: relative;
+        height: 65vh;
+        overflow: hidden;
+
+        img.cover{
+            top: 0;
+            left: 0;
+            position: absolute;
+            @include transitionSlow;
+            
+            &.cover_c, &.cover_b{
+                transform: translateX(100%);
+            }
+        }
+
+
+        header{
+            position: absolute;
+            width: 100%;
+            z-index: 4;
+            top: 32px;
+            left: 32px;
+            @include flexDisplay(row, center, flex-start);
+
+            img.logo{
+                width: 10%;
+                margin-right: 32px;
+            }
+
+            nav{
+                a{
+                    font-size: $small;
+                    color: $white;
+                    margin: 0 16px;
+                    @include transitionSlow;
+                }
+            }
+        }
+    }
+
+    .right{
+        position: relative;
+        padding: 0 80px;
+        @include flexDisplay(column, center, center);
+
+
+        h2{
+            font-weight: 400;
+            color: $black;
+            font-size: $large;
+        }
+
+        p{
+            line-height: 1.4;
+            font-size: $small;
+            color: $dark-gray;
+            margin: 16px 0 32px 0;
+        }
+
+        a{
+            color: $very-dark-gray;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            word-spacing: 5px;
+            font-size: $medium;
+            font-weight: 200;
+            @include transitionEffect;
+
+            &:hover{
+                color: $black;
+            }
+        }
+
+        .toggle{
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            padding: 10px;
+            background-color: $black;
+            @include flexDisplay(row, center, space-between);
+
+            img{
+                width: 80%;
+                cursor: pointer;
+                @include transitionEffect;
+
+                &#left{
+                    margin-right: 20px;
+                }
+                &#right{
+                    margin-left: 20px;
+                }
+
+                &:hover{
+                    transform: scale(1.4);
+                }
+            }
+            
+        }
+    }
+}
+
+.bottom{
+    position: relative;
+    height: 40%;
+    @include gridDisplay(repeat(3, 1fr), 0);
+
+    .text{
+        padding: 42px 32px 32px 32px;
+
+        h3{
+            font-size: $big;
+            margin-bottom: 16px;
+            color: $very-dark-gray;
+        }
+
+        p{
+            line-height: 1.4;
+            font-size: $small;
+            color: $dark-gray;
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 1145px){
+
+    body{
+        overflow-y: scroll;
+        overflow-x: hidden;
+        height: auto;
+    }
+
+    .top{
+        @include gridDisplay(none, 0);
+
+        .left{
+            height: 90vh;
+        }
+        
+        .right{
+            height: auto;
+            padding: 100px 64px;
+
+
+            .toggle{
+                left: 0;
+                top: 0;
+                bottom: auto;
+            }
+        }
+    }
+}
+
+
+@media screen and (max-width: 1025px){
+
+    .bottom{
+        @include gridDisplay(none, 0);
+    }   
+    
+}
+
+
+@media screen and (max-width: 915px){
+
+    .top{
+        .left{
+            height: 70vh;
+        }
+    }
+}
+
+
+@media screen and (max-width: 715px){
+
+    .top{
+        .left{
+            height: 60vh;
+        }
+    }
+}
+
+@media screen and (max-width: 612px){
+
+    .top{
+        .left{
+            height: 50vh;
+        }
+        .right{
+            height: auto;
+            padding: 64px 32px;
+        }
+    }
+}
+
+
+@media screen and (max-width: 525px){
+
+    .top{
+        .left{
+            height: 40vh;
+        }
+        .right{
+            h2{
+                font-size: $big;
+            }
+            a{
+                font-size: $small;
+            }
+        }
+    }
+}
+
+
+
+@media screen and (max-width: 440px){
+
+    .menu_btn{
+        display: block;
+        position: absolute;
+        z-index: 5;
+        top: 26px;
+        left: 16px;
+        width: 30px;
+        height: 2px;
+        background-color: #fff;
+        @include transitionEffect;
+
+        &.open{
+            width: 25px;
+
+            &::before{
+                width: 125%;
+            }
+            &::after{
+                width: 50%;
+            }
+        }
+
+        &::before{
+            position: absolute;
+            content: '';
+            height: 100%;
+            width: 100%;
+            top: -6px;
+            left: 0;
+            background-color: #fff;
+        }
+
+        &::after{
+            position: absolute;
+            content: '';
+            height: 100%;
+            width: 100%;
+            bottom: -6px;
+            left: 0;
+            background-color: #fff;
+        }
+    }
+    
+    .top{
+        .left{
+            height: 30vh;
+
+            header{
+                top: 16px;
+                left: 16px;
+                @include flexDisplay(row, center, flex-end);
+
+                img.logo{
+                    display: none;
+                }
+
+                nav{
+                    transform: translateX(-200%);
+                    padding-right: 16px;
+                    opacity: 0;
+                    @include transitionSlow;
+                    
+                    &.open{
+                        transform: translateX(0%);
+                        opacity: 1;
+                    }
+                    
+                    a{
+                        margin: 0 10px;
+                    }
+                }
+            }
+        }
+    }
 }
